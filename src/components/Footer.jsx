@@ -16,6 +16,9 @@ const Footer = () => {
           <Link as={RouterLink} to="/contact" _hover={{ textDecoration: "none", color: "teal.300" }}>
             Contact
           </Link>
+          <Link as={RouterLink} to="/canvas" _hover={{ textDecoration: "none", color: "teal.300" }}>
+            Canvas
+          </Link>
         </HStack>
         <HStack spacing={4} mb={{ base: 4, md: 0 }}>
           <IconButton
