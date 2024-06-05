@@ -1,17 +1,15 @@
 import React, { useState } from 'react';
 import { Container, VStack, Heading, Input, Button, Text } from '@chakra-ui/react';
-import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const navigate = useNavigate();
 
   const handleLogin = () => {
     if (username === 'test' && password === 'test') {
       localStorage.setItem('isAuthenticated', 'true');
-      navigate('/');
+      window.location.href = '/';
     } else {
       setError('Invalid credentials');
     }
