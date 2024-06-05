@@ -22,6 +22,9 @@ const Header = () => {
           <Link as={RouterLink} to="/contact" _hover={{ textDecoration: "none", color: "teal.300" }}>
             Contact
           </Link>
+          <Link as={RouterLink} to="/new-link" _hover={{ textDecoration: "none", color: "teal.300" }}>
+            New Link
+          </Link> {/* New navigation link */}
         </HStack>
 
         {/* Search Bar */}
