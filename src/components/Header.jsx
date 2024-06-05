@@ -25,6 +25,9 @@ const Header = () => {
           <Link as={RouterLink} to="/new-link" _hover={{ textDecoration: "none", color: "teal.300" }}>
             New Link
           </Link> {/* New navigation link */}
+          <Link as={RouterLink} to="/canvas" _hover={{ textDecoration: "none", color: "teal.300" }}>
+            Canvas
+          </Link>
         </HStack>
 
         {/* Search Bar */}
