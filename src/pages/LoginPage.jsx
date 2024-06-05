@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, VStack, Heading, Input, Button, Text, Box } from '@chakra-ui/react';
+import { Container, VStack, Heading, Input, Button, Text } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {

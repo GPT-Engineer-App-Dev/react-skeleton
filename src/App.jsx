@@ -13,7 +13,7 @@ function App() {
   return (
     <Router>
       <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
-        <Header /> {/* Add the Header component here */}
+        <Header />
         <div style={{ flex: 1 }}>
           <Routes>
             <Route path="/login" element={<LoginPage />} />
@@ -23,7 +23,7 @@ function App() {
             <Route path="/events" element={isAuthenticated() ? <EventsPage /> : <Navigate to="/login" />} />
           </Routes>
         </div>
-        <Footer /> {/* Add the Footer component here */}
+        <Footer />
       </div>
     </Router>
   );
