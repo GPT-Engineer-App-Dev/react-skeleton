@@ -1,10 +1,13 @@
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import { Route, BrowserRouter as Router, Routes, Navigate } from "react-router-dom";
 import Index from "./pages/Index.jsx";
 import CanvasPage from "./pages/CanvasPage.jsx";
 import NewsPage from "./pages/NewsPage.jsx";
 import EventsPage from "./pages/EventsPage.jsx"; // Import the EventsPage component
+import LoginPage from "./pages/LoginPage.jsx";
 import Footer from "./components/Footer.jsx"; // Import the Footer component
 import Header from "./components/Header.jsx"; // Import the Header component
+
+const isAuthenticated = () => localStorage.getItem('isAuthenticated') === 'true';
 
 function App() {
   return (
@@ -13,10 +16,11 @@ function App() {
         <Header /> {/* Add the Header component here */}
         <div style={{ flex: 1 }}>
           <Routes>
-            <Route exact path="/" element={<Index />} />
-            <Route path="/canvas" element={<CanvasPage />} />
-            <Route path="/news" element={<NewsPage />} />
-            <Route path="/events" element={<EventsPage />} /> {/* Add the EventsPage route */}
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/" element={isAuthenticated() ? <Index /> : <Navigate to="/login" />} />
+            <Route path="/canvas" element={isAuthenticated() ? <CanvasPage /> : <Navigate to="/login" />} />
+            <Route path="/news" element={isAuthenticated() ? <NewsPage /> : <Navigate to="/login" />} />
+            <Route path="/events" element={isAuthenticated() ? <EventsPage /> : <Navigate to="/login" />} />
           </Routes>
         </div>
         <Footer /> {/* Add the Footer component here */}
