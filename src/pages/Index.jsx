@@ -1,5 +1,6 @@
 import { Container, Text, VStack, Heading, Button } from "@chakra-ui/react";
 import { FaRocket } from "react-icons/fa";
+import DrawingCanvas from "../components/DrawingCanvas";
 
 const Index = () => {
   return (
@@ -10,6 +11,7 @@ const Index = () => {
         <Button leftIcon={<FaRocket />} colorScheme="teal" size="lg">
           Get Started
         </Button>
+        <DrawingCanvas />
       </VStack>
     </Container>
   );
