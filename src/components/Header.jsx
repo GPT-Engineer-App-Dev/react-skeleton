@@ -24,10 +24,13 @@ const Header = () => {
           </Link>
           <Link as={RouterLink} to="/news" _hover={{ textDecoration: "none", color: "teal.300" }}>
             News
-          </Link> {/* New navigation link */}
+          </Link>
           <Link as={RouterLink} to="/canvas" _hover={{ textDecoration: "none", color: "teal.300" }}>
             Canvas
           </Link>
+          <Link as={RouterLink} to="/events" _hover={{ textDecoration: "none", color: "teal.300" }}>
+            Events
+          </Link> {/* Add the Events link */}
         </HStack>
 
         {/* Search Bar */}
