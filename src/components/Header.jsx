@@ -22,8 +22,8 @@ const Header = () => {
           <Link as={RouterLink} to="/contact" _hover={{ textDecoration: "none", color: "teal.300" }}>
             Contact
           </Link>
-          <Link as={RouterLink} to="/new-link" _hover={{ textDecoration: "none", color: "teal.300" }}>
-            New Link
+          <Link as={RouterLink} to="/news" _hover={{ textDecoration: "none", color: "teal.300" }}>
+            News
           </Link> {/* New navigation link */}
           <Link as={RouterLink} to="/canvas" _hover={{ textDecoration: "none", color: "teal.300" }}>
             Canvas
