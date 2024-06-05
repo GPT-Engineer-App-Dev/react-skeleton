@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Container, Heading, Table, Thead, Tbody, Tr, Th, Td, Spinner, Box, Button, IconButton, useDisclosure, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, FormControl, FormLabel, Input, Checkbox, useToast } from '@chakra-ui/react';
+import React, { useState, useEffect } from 'react';
+import { Container, Heading, Table, Thead, Tbody, Tr, Th, Td, Spinner, Box, Button, IconButton, useDisclosure, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, FormControl, FormLabel, Input, Checkbox, useToast, HStack } from '@chakra-ui/react';
 import { useEvents, useAddEvent, useUpdateEvent, useDeleteEvent } from '../integrations/supabase';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 
@@ -11,13 +11,41 @@ const EventsPage = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [currentEvent, setCurrentEvent] = useState(null);
   const [formData, setFormData] = useState({ name: '', date: '', venue_id: '', is_starred: false });
+  const [filters, setFilters] = useState({ name: '', date: '', venue_id: '' });
+  const [filteredEvents, setFilteredEvents] = useState([]);
   const toast = useToast();
+
+  useEffect(() => {
+    if (events) {
+      setFilteredEvents(events);
+    }
+  }, [events]);
+
+  useEffect(() => {
+    if (events) {
+      setFilteredEvents(
+        events.filter(event => 
+          (filters.name === '' || event.name.toLowerCase().includes(filters.name.toLowerCase())) &&
+          (filters.date === '' || event.date === filters.date) &&
+          (filters.venue_id === '' || event.venue_id.toString() === filters.venue_id)
+        )
+      );
+    }
+  }, [filters, events]);
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData({
       ...formData,
       [name]: type === 'checkbox' ? checked : value,
+    });
+  };
+
+  const handleFilterChange = (e) => {
+    const { name, value } = e.target;
+    setFilters({
+      ...filters,
+      [name]: value,
     });
   };
 
@@ -75,6 +103,20 @@ const EventsPage = () => {
     <Container maxW="container.lg" py={8}>
       <Heading as="h1" size="xl" mb={6}>Events</Heading>
       <Button colorScheme="teal" onClick={onOpen} mb={4}>Add Event</Button>
+      <HStack spacing={4} mb={4}>
+        <FormControl>
+          <FormLabel>Filter by Name</FormLabel>
+          <Input name="name" value={filters.name} onChange={handleFilterChange} />
+        </FormControl>
+        <FormControl>
+          <FormLabel>Filter by Date</FormLabel>
+          <Input type="date" name="date" value={filters.date} onChange={handleFilterChange} />
+        </FormControl>
+        <FormControl>
+          <FormLabel>Filter by Venue ID</FormLabel>
+          <Input name="venue_id" value={filters.venue_id} onChange={handleFilterChange} />
+        </FormControl>
+      </HStack>
       <Table variant="striped" colorScheme="teal">
         <Thead>
           <Tr>
@@ -88,7 +130,7 @@ const EventsPage = () => {
           </Tr>
         </Thead>
         <Tbody>
-          {events.map((event) => (
+          {filteredEvents.map((event) => (
             <Tr key={event.id}>
               <Td>{event.id}</Td>
               <Td>{new Date(event.created_at).toLocaleString()}</Td>
